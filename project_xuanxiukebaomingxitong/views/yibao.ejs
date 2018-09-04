@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">北航附中选课系统</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ><a href="/">选课面板</a></li>
+                <li class="active"><a href="/student/<%=xuehao%>">我的已报课程</a></li>
+                <li ><a href="/xiugai">修改密码</a></li>
+
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input id="mohu" type="text" class="form-control" placeholder="请输入关键词，筛选课程">
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a>欢迎！<%= xingming %> 学号<%= xuehao %></a></li>
+                <li id="tuichu"><a href="#">退出登录</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<ol class="breadcrumb">
+
+    <li class="active"><%= xingming %>同学：</li>
+</ol>
+
+<h1>你选的课程如下</h1>
+
+<ul>
+    <% for(var i = 0 ; i < ke.length ; i++){%>
+    <li><%= ke[i] %></li>
+    <% } %>
+</ul>
+<script src="/public/js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+<script>
+
+    //退出
+    $("#tuichu").click(function () {
+        if(confirm("确定要退出吗？")){
+            $.get("/tuichu",function (data) {
+                if(data.result==1){
+                    window.location="/"
+                }
+            })
+        }
+    })
+</script>
+</body>
+</html>
